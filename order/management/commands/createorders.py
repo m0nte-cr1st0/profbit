@@ -7,12 +7,14 @@ from order.models import Order, OrderItem
 
 
 class Command(BaseCommand):
-    help = 'Closes the specified poll for voting'
+    help = 'Create orders'
 
     def add_arguments(self, parser):
+        """Parse arguments from command line"""
         parser.add_argument('orders_count', nargs='+', type=int)
 
     def handle(self, *args, **options):
+        """Create orders and order items"""
         start_datetime = "01.01.2018 09:00"
         orders_count = options['orders_count'][0]
         Order.objects.bulk_create([
