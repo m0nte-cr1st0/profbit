@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <td>Имя товара</td>
+                    <td>Данные</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product_name, orders in products %}
+                    <tr>
+                        <td>{{ product_name }}</td>
+                        <td>
+                            {% for order in orders %}
+                                Заказ {{ order.1 }} - Цена {{ order.2 }} - Дата {{ order.0 }}
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div><b>Самый покупаемый товар</b>: {{ most_popular }}</div>
+    <div><b>Количество запросов</b>: {{ connection.queries|length }}</div>
+</body>
+</html>
